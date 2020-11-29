@@ -1,0 +1,41 @@
+https://vop.95516.com/gateway/marketing/api/activity/getActiList（接口）
+
+header:
+Accept: application/json, text/plain, */*
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh,zh-CN;q=0.9,en-US;q=0.8,en;q=0.7,zh-TW;q=0.6
+Authorization: 
+Connection: keep-alive
+Content-Length: 203
+Content-Type: application/json;charset=UTF-8
+CSRF-TOKEN: 
+Host: vop.95516.com
+Origin: https://vop.95516.com
+Referer: https://vop.95516.com/
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36
+
+body:
+{"qActId":"","qActNm":"","qActTyp":"","qActStat":"","qActStartTm":"","qActEndTm":"","qOrgId":"","qOrgNm":"","qBusiOrgId":"","qBusiOrgNm":"","qUsingStat":"","budgetCode":"","currentPage":{{index}},"pageSize":40}
+
+test:
+var index = Number(pm.environment.get("index")) + 1 ;
+var maxIndex = pm.environment.get("maxIndex");
+if( index < maxIndex ){
+    pm.environment.set("index",index);
+}
+var body=responseBody;
+var title=body.match(new RegExp('data":(.+?)"}]}'));
+title= title+"\"}]"
+tests[title]=true;
+
+
+pre-request:
+if(!pm.environment.get("index")){
+    var startIndex = 20;
+    var endIndex = 37;
+    pm.environment.set("index",startIndex);
+    pm.environment.set("maxIndex",endIndex);
+}
